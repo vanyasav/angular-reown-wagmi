@@ -5,6 +5,8 @@ import { AppKit, createAppKit, EventsControllerState } from '@reown/appkit';
 import { immutableZkEvmTestnet } from '@reown/appkit/networks';
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
 
+const PROJECT_ID = 'YOUR_PROJECT_ID';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -18,13 +20,12 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // 1. Get a project ID at https://cloud.reown.com
-    const projectId = '';
 
     const networks = [immutableZkEvmTestnet];
 
     // 2. Set up Wagmi adapter
     const wagmiAdapter = new WagmiAdapter({
-      projectId,
+      projectId: PROJECT_ID,
       networks,
     });
 
@@ -42,7 +43,7 @@ export class AppComponent implements OnInit {
       adapters: [wagmiAdapter],
       networks: [immutableZkEvmTestnet],
       metadata,
-      projectId,
+      projectId: PROJECT_ID,
       features: {
         email: false,
         socials: false,
