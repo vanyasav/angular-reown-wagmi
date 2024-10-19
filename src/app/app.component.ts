@@ -5,7 +5,7 @@ import { AppKit, createAppKit, EventsControllerState } from '@reown/appkit';
 import { immutableZkEvmTestnet } from '@reown/appkit/networks';
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
 
-const PROJECT_ID = 'YOUR_PROJECT_ID';
+const PROJECT_ID = '';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +19,6 @@ export class AppComponent implements OnInit {
   modal!: AppKit;
 
   ngOnInit(): void {
-    // 1. Get a project ID at https://cloud.reown.com
-
     const networks = [immutableZkEvmTestnet];
 
     // 2. Set up Wagmi adapter
@@ -39,7 +37,7 @@ export class AppComponent implements OnInit {
 
     // 3. Create the modal
     this.modal = createAppKit({
-      allWallets: 'HIDE',
+      allWallets: 'SHOW',
       adapters: [wagmiAdapter],
       networks: [immutableZkEvmTestnet],
       metadata,
@@ -51,17 +49,11 @@ export class AppComponent implements OnInit {
         onramp: false,
         history: false,
       },
-      featuredWalletIds: [
-        'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
-        '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0',
-        'fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa',
-        'e9ff15be73584489ca4a66f64d32c4537711797e30b6660dbcb71ea72a42b1f4',
-      ],
+      // featuredWalletIds: [
+      //   'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
+      // ],
       includeWalletIds: [
         'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
-        '4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0',
-        'fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa',
-        'e9ff15be73584489ca4a66f64d32c4537711797e30b6660dbcb71ea72a42b1f4',
       ],
       themeMode: 'dark',
     });
