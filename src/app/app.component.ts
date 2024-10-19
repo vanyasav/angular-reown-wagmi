@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { AppKit, createAppKit, EventsControllerState } from '@reown/appkit';
-import { immutableZkEvmTestnet } from '@reown/appkit/networks';
+import { immutableZkEvmTestnet, mainnet } from '@reown/appkit/networks';
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
 
 const PROJECT_ID = '';
@@ -39,16 +39,9 @@ export class AppComponent implements OnInit {
     this.modal = createAppKit({
       allWallets: 'SHOW',
       adapters: [wagmiAdapter],
-      networks: [immutableZkEvmTestnet],
+      networks: [immutableZkEvmTestnet, mainnet],
       metadata,
       projectId: PROJECT_ID,
-      features: {
-        email: false,
-        socials: false,
-        swaps: false,
-        onramp: false,
-        history: false,
-      },
       // featuredWalletIds: [
       //   'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
       // ],
@@ -75,5 +68,9 @@ export class AppComponent implements OnInit {
 
   connectWallet() {
     this.modal.open().then(() => {});
+  }
+
+  openNetworks() {
+    this.modal.open({ view: 'Networks' }).then(() => {});
   }
 }
