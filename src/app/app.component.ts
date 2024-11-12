@@ -5,7 +5,7 @@ import { AppKit, createAppKit, EventsControllerState } from '@reown/appkit';
 import { immutableZkEvmTestnet, mainnet } from '@reown/appkit/networks';
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
 
-const PROJECT_ID = '';
+const PROJECT_ID = '805d239b9d2006f32d648af4fc26f713';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,6 @@ const PROJECT_ID = '';
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-  title = 'angular-reown-wagmi';
   modal!: AppKit;
 
   ngOnInit(): void {
@@ -39,7 +38,7 @@ export class AppComponent implements OnInit {
     this.modal = createAppKit({
       allWallets: 'SHOW',
       adapters: [wagmiAdapter],
-      networks: [immutableZkEvmTestnet, mainnet],
+      networks: [immutableZkEvmTestnet],
       metadata,
       projectId: PROJECT_ID,
       // featuredWalletIds: [
