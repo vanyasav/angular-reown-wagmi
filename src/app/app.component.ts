@@ -1,49 +1,57 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 import { AppKit, createAppKit, EventsControllerState } from '@reown/appkit';
-import { immutableZkEvmTestnet, mainnet } from '@reown/appkit/networks';
+import { immutableZkEvmTestnet } from '@reown/appkit/networks';
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
+import { version, dependencies } from '../../package.json';
 
-const PROJECT_ID = '805d239b9d2006f32d648af4fc26f713';
+const PROJECT_ID = '52dd9241e6d4b51c3b077e73d87d7648';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
+  imports: [CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
+  standalone: true,
 })
 export class AppComponent implements OnInit {
-  modal!: AppKit;
+  protected version = version;
+  protected appkit = dependencies['@reown/appkit'];
+  private modal!: AppKit;
 
   ngOnInit(): void {
     const networks = [immutableZkEvmTestnet];
 
-    // 2. Set up Wagmi adapter
     const wagmiAdapter = new WagmiAdapter({
       projectId: PROJECT_ID,
       networks,
     });
 
-    // 3. Configure the metadata
     const metadata = {
       name: 'AppKit',
       description: 'AppKit Example',
-      url: 'https://example.com', // origin must match your domain & subdomain
+      url: 'https://example.com',
       icons: ['https://avatars.githubusercontent.com/u/179229932'],
     };
 
-    // 3. Create the modal
     this.modal = createAppKit({
-      allWallets: 'SHOW',
+      allWallets: 'HIDE',
       adapters: [wagmiAdapter],
       networks: [immutableZkEvmTestnet],
       metadata,
+      allowUnsupportedChain: false,
       projectId: PROJECT_ID,
-      // featuredWalletIds: [
-      //   'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
-      // ],
+      features: {
+        email: false,
+        socials: false,
+        swaps: false,
+        onramp: false,
+        history: false,
+      },
+      featuredWalletIds: [
+        'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
+      ],
       includeWalletIds: [
         'c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96',
       ],
