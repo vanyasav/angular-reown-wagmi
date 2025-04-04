@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AppKit, createAppKit, EventsControllerState } from '@reown/appkit';
-import { immutableZkEvmTestnet } from '@reown/appkit/networks';
+import { immutableZkEvmTestnet, mainnet } from '@reown/appkit/networks';
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
-import { version, dependencies } from '../../package.json';
 
-const PROJECT_ID = '52dd9241e6d4b51c3b077e73d87d7648';
+const PROJECT_ID = 'PROJECT_ID';
 
 @Component({
   selector: 'app-root',
@@ -16,12 +15,10 @@ const PROJECT_ID = '52dd9241e6d4b51c3b077e73d87d7648';
   standalone: true,
 })
 export class AppComponent implements OnInit {
-  protected version = version;
-  protected appkit = dependencies['@reown/appkit'];
   private modal!: AppKit;
 
   ngOnInit(): void {
-    const networks = [immutableZkEvmTestnet];
+    const networks = [immutableZkEvmTestnet, mainnet];
 
     const wagmiAdapter = new WagmiAdapter({
       projectId: PROJECT_ID,
@@ -38,7 +35,7 @@ export class AppComponent implements OnInit {
     this.modal = createAppKit({
       allWallets: 'HIDE',
       adapters: [wagmiAdapter],
-      networks: [immutableZkEvmTestnet],
+      networks: [immutableZkEvmTestnet, mainnet],
       metadata,
       allowUnsupportedChain: false,
       projectId: PROJECT_ID,
